@@ -75,7 +75,7 @@ script:
   - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm /usr/bin/php --version | grep -qF "PHP $PHP_VERSION"'
 
   # Ensure PHP configuration has no warnings.
-  # - sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm ! php --version | grep -i 'warning'
+  - sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm ! php --version 2>&1 >/dev/null | grep -i 'warning'
 
   # Ensure PHP configurations have taken effect.
   - sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm php -i | grep 'memory_limit.*192'
